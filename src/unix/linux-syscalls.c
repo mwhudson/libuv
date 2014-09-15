@@ -311,7 +311,7 @@ int uv__epoll_wait(int epfd,
 #if defined(__NR_epoll_wait)
   return syscall(__NR_epoll_wait, epfd, events, nevents, timeout);
 #else
-  return errno = ENOSYS, -1;
+  return uv__epoll_pwait(epfd, events, nevents, timeout, NULL)
 #endif
 }
 
